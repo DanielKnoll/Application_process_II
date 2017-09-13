@@ -54,8 +54,83 @@ def applicants_after_2016():
 
 @connection_handler
 def applicants_and_mentors():
-    query = """SELECT a.first_name AS applicant, a.application_code, m.first_name, m.last_name
-               FROM applicants a, applicants_mentors am, mentors m
-               WHERE a.id = am.applicant_id AND m.id = am.mentor_id
-               ORDER BY a.id;"""
+    query = """SELECT applicants.first_name AS applicant, applicants.application_code,
+               COALESCE(mentors.first_name, 'No data') AS first_name,
+               COALESCE(mentors.last_name, 'No data') AS last_name
+               FROM applicants
+               LEFT JOIN applicants_mentors ON applicants.id = applicants_mentors.applicant_id
+               LEFT JOIN mentors ON mentors.id = applicants_mentors.mentor_id
+               ORDER BY applicants.id;"""
+    return query
+
+
+######################################
+#       Queries from previous SI     #
+######################################
+
+
+@connection_handler
+def get_mentors_full_name():
+    query = """SELECT first_name, last_name
+               FROM mentors;"""
+    return query
+
+
+@connection_handler
+def get_mentor_nicks_from_miskolc():
+    query = """SELECT nick_name
+               FROM mentors WHERE city = 'Miskolc';"""
+    return query
+
+
+@connection_handler
+def get_me_carols_number():
+    query = """SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
+               FROM applicants
+               WHERE first_name = 'Carol';"""
+    return query
+
+
+@connection_handler
+def carol_dumped_me_give_me_any_other_girls_number():
+    query = """SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
+               FROM applicants
+               WHERE email LIKE '%@adipiscingenimmi.edu';"""
+    return query
+
+
+@connection_handler
+def get_markus_into_the_system():
+    query = """INSERT INTO applicants(first_name, last_name, phone_number, email, application_code)
+              VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);
+              SELECT *
+              FROM applicants
+              WHERE application_code = 54823;"""
+    return query
+
+
+@connection_handler
+def update_Jemimas_number():
+    query = """UPDATE applicants
+               SET phone_number = '003670/223-7459'
+               WHERE first_name = 'Jemima' AND last_name = 'Foreman';
+               SELECT *
+               FROM applicants
+               WHERE first_name = 'Jemima' AND last_name = 'Foreman';"""
+    return query
+
+
+@connection_handler
+def kick_that_mauriseu_guys_out():
+    """ Causing forign key erorr if executed """
+    query = """DELETE FROM applicants
+               WHERE email LIKE '%@mauriseu.net';"""
+    return query
+
+
+@connection_handler
+def kick_that_mauriseu_guys_out_updated():
+    """ Causing forign key erorr if executed """
+    query = """DELETE FROM applicants
+               WHERE email LIKE '%@mauriseu.net';"""
     return query
