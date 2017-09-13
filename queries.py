@@ -29,3 +29,14 @@ def mentors_by_country():
                GROUP BY schools.country
                ORDER BY schools.country;"""
     return query
+
+
+@connection_handler
+def school_contacts():
+    query = """SELECT schools.name,
+               COALESCE(mentors.first_name, 'No data') AS first_name,
+               COALESCE(mentors.last_name, 'No data') AS last_name
+               FROM mentors RIGHT JOIN schools
+               ON (mentors.id = schools.contact_person)
+               ORDER BY schools.name;"""
+    return query
