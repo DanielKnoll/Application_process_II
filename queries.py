@@ -50,3 +50,12 @@ def applicants_after_2016():
                WHERE applicants_mentors.creation_date > '2016-01-01'
                ORDER BY applicants_mentors.creation_date DESC;"""
     return query
+
+
+@connection_handler
+def applicants_and_mentors():
+    query = """SELECT a.first_name AS applicant, a.application_code, m.first_name, m.last_name
+               FROM applicants a, applicants_mentors am, mentors m
+               WHERE a.id = am.applicant_id AND m.id = am.mentor_id
+               ORDER BY a.id;"""
+    return query
