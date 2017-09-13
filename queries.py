@@ -1,10 +1,11 @@
-import database_common
+from database_common import connection_handler
 
 
-@database_common.connection_handler
-def get_mentor_names():
-    first_name = "László"
-    quary = """SELECT * FROM mentors
-               WHERE first_name = %(f_n)s ORDER BY first_name;"""
-    values = {'f_n': first_name}
+@connection_handler
+def mentors_and_schools():
+    quary = """SELECT mentors.first_name, mentors.last_name, schools.name, schools.country
+               FROM mentors JOIN schools
+               ON (mentors.city = schools.city)
+               ORDER BY mentors.id;"""
+    values = ""
     return quary, values
