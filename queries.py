@@ -121,16 +121,17 @@ def update_Jemimas_number():
 
 
 @connection_handler
-def kick_that_mauriseu_guys_out():
-    """ Causing forign key erorr if executed """
-    query = """DELETE FROM applicants
+def get_mauriseu_guys_id():
+    query = """SELECT id FROM applicants
                WHERE email LIKE '%@mauriseu.net';"""
     return query
 
 
 @connection_handler
 def kick_that_mauriseu_guys_out_updated():
-    """ Causing forign key erorr if executed """
-    query = """DELETE FROM applicants
-               WHERE email LIKE '%@mauriseu.net';"""
+    mauriseu_ids = get_mauriseu_guys_id()
+    query = ""
+    for i in mauriseu_id:
+        query += "DELETE FROM applicants_mentors WHERE applicant_id = " + str(i["id"]) + "; "
+        query += "DELETE FROM applicants WHERE id = " + str(i["id"]) + "; "
     return query
