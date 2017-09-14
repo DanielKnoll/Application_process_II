@@ -110,7 +110,7 @@ def get_markus_into_the_system():
 
 
 @connection_handler
-def update_Jemimas_number():
+def update_jemimas_number():
     query = """UPDATE applicants
                SET phone_number = '003670/223-7459'
                WHERE first_name = 'Jemima' AND last_name = 'Foreman';
