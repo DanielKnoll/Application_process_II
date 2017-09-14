@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section>       
+    <table border="1">
+        <tr>
+            {% for key in key_order%}
+            <th>{{ key_aliases[key] }}</th>
+            {% endfor %}
+        </tr>
+        {%for element in result%}
+        <tr>
+            {%for key in key_order%}
+            <td> {{ element[key] }}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+</section>
+{% endblock %}
