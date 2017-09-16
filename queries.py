@@ -108,7 +108,7 @@ def get_markus_info():
 
 
 @connection_handler
-def get_markus_into_the_system():
+def get_markus_into_the_system(*args):
     query = """INSERT INTO applicants(first_name, last_name, phone_number, email, application_code)
               VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);"""
     return query
@@ -133,10 +133,14 @@ def get_mauriseu_guys_id():
 
 
 @connection_handler
-def kick_that_mauriseu_guys_out_updated():
+def kick_that_mauriseu_guys_out_updated(*args):
     mauriseu_ids = get_mauriseu_guys_id()
     query = ""
     for i in mauriseu_ids:
         query += "DELETE FROM applicants_mentors WHERE applicant_id = " + str(i["id"]) + "; "
         query += "DELETE FROM applicants WHERE id = " + str(i["id"]) + "; "
     return query
+
+######################################
+#           Extra features           #
+######################################

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request
 import os
 import queries
-from constants import COLUMN_ORDERS, ALIASES
+from constants import COLUMN_ORDERS, ALIASES, DESC
 app = Flask(__name__)
 
 
@@ -35,22 +35,34 @@ def temple(query):
     elif query == "hat_owner":
         result = queries.carol_dumped_me_give_me_any_other_girls_number()
     elif query == "add_markus":
-        query = "all_appl"
-        result = queries.get_markus_info()
-        if not result:
-            queries.get_markus_into_the_system()
-            result = queries.get_markus_info()
+        result = add_markus()
     elif query == "jemimas_new_number":
-        query = "all_appl"
         result = queries.update_jemimas_number()
     elif query == "mauriseu_guys_leaving":
-        query = "all_appl"
-        """ids = queries.get_mauriseu_guys_id()
-        print(ids)
-        if ids:
-            queries.kick_that_mauriseu_guys_out_updated(ids)
-        message = "They are out."""
-        message = "Function under construction."
+        queries.kick_that_mauriseu_guys_out_updated("Do not fetch")
+        message = "They are out."
+
+    if query in ["add_markus", "jemimas_new_number", "mauriseu_guys_leaving"]:
+        key_order = COLUMN_ORDERS["all_appl"]
+    else:
+        key_order = COLUMN_ORDERS[query]
+
+    return render_template("list.html",
+                           result=result,
+                           key_order=key_order,
+                           key_aliases=ALIASES,
+                           description=DESC[query],
+                           message=message)
+
+
+@app.route("/reset", methods=["GET"])
+def reset():
+    os.system("psql -f application_process_sample_data_2.sql")
+    return redirect('/')
+
+
+@app.route("/list_table", methods=["GET"])
+def select_all():
 
     return render_template("list.html",
                            result=result,
@@ -59,10 +71,13 @@ def temple(query):
                            message=message)
 
 
-@app.route("/reset", methods=["GET"])
-def reset():
-    os.system("psql -f application_process_sample_data_2.sql")
-    return redirect('/')
+def add_markus():
+    result = queries.get_markus_info()
+    if not result:
+        queries.get_markus_into_the_system("Do not fetch")
+        result = queries.get_markus_info()
+    return result
+
 
 if __name__ == "__main__":
     app.run(debug=True)

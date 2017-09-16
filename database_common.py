@@ -15,11 +15,13 @@ def open_database():
 
 def connection_handler(function):
     def wrapper(*args, **kwargs):
+        ret_value = ""
         connection = open_database()
         dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         query = function(*args, **kwargs)
         dict_cur.execute(query)
-        ret_value = dict_cur.fetchall()
+        if not args:
+            ret_value = dict_cur.fetchall()
         dict_cur.close()
         connection.close()
         return ret_value
