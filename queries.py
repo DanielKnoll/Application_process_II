@@ -135,10 +135,11 @@ def get_mauriseu_guys_id():
 @connection_handler
 def kick_that_mauriseu_guys_out_updated(*args):
     mauriseu_ids = get_mauriseu_guys_id()
-    query = ""
-    for i in mauriseu_ids:
-        query += "DELETE FROM applicants_mentors WHERE applicant_id = " + str(i["id"]) + "; "
-        query += "DELETE FROM applicants WHERE id = " + str(i["id"]) + "; "
+    query = "SELECT * FROM applicants; "
+    if mauriseu_ids:
+        for i in mauriseu_ids:
+            query += "DELETE FROM applicants_mentors WHERE applicant_id = " + str(i["id"]) + "; "
+            query += "DELETE FROM applicants WHERE id = " + str(i["id"]) + "; "
     return query
 
 ######################################
