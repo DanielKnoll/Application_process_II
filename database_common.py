@@ -19,8 +19,10 @@ def connection_handler(function):
         connection = open_database()
         dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         query = function(*args, **kwargs)
-        dict_cur.execute(query)
-        if not args:
+        if args and args[0] == "Do not fetch":
+            dict_cur.execute(query)
+        else:    
+            dict_cur.execute(query)
             ret_value = dict_cur.fetchall()
         dict_cur.close()
         connection.close()
