@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 <section>
-    {{ description }}
+    {% for paragraph in description %} 
+        {{ paragraph }}<br>
+    {% endfor %}
     <br>
-    
     {% if message %}
         {{ message }}
     {% else %}    
         <table border="1">
             <tr>
-                {% for key in key_order%}
+                {% for key in key_order %}
                 <th>{{ key_aliases[key] }}</th>
                 {% endfor %}
             </tr>
-            {%for element in result%}
+            {% for element in result %}
             <tr>
-                {%for key in key_order%}
+                {%for key in key_order %}
                 <td> {{ element[key] }}</td>
-                {%endfor%}
+                {% endfor %}
             </tr>
-            {%endfor%}
+            {% endfor %}
         </table>
     {% endif %}
+    <br>
 </section>
 {% endblock %}
