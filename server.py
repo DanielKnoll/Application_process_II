@@ -83,7 +83,7 @@ def show_table_page():
         order = "all_app_ment"
 
     result = queries.show_table(table_name)
-    return render_template("list.html",
+    return render_template("form.html",
                            result=result,
                            key_order=COLUMN_ORDERS[order],
                            key_aliases=ALIASES,
