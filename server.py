@@ -61,14 +61,33 @@ def reset():
     return redirect('/')
 
 
-@app.route("/list_table", methods=["GET"])
-def select_all():
+@app.route("/choose_table", methods=["GET"])
+def select_table():
+    return render_template("form.html")
 
+
+@app.route("/list_table", methods=["POST"])
+def show_table_page():
+    table_name = request.form
+    if table_name["table"] == "1":
+        table_name = "applicants"
+        order = "all_appl"
+    elif table_name["table"] == "2":
+        table_name = "mentors"
+        order = "all_ment"
+    elif table_name["table"] == "3":
+        table_name = "schools"
+        order = "all_schools"
+    elif table_name["table"] == "4":
+        table_name = "applicants_mentors"
+        order = "all_app_ment"
+
+    result = queries.show_table(table_name)
     return render_template("list.html",
                            result=result,
-                           key_order=COLUMN_ORDERS[query],
+                           key_order=COLUMN_ORDERS[order],
                            key_aliases=ALIASES,
-                           message=message)
+                           )
 
 
 def add_markus():

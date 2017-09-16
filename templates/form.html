@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <h3>Choose a table to list:</h3>
+    <form action="/list_table" method="POST">
+        <input type="radio" name="table" value="1" checked>Applicants<br>
+        <input type="radio" name="table" value="2">Mentors<br>
+        <input type="radio" name="table" value="3">Schools<br>
+        <input type="radio" name="table" value="4">Applicants&amp;Mentors<br><br>
+        <input type="submit" value="Submit"><br>
+    </form>
+</section>
+{% endblock %}

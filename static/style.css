@@ -104,11 +104,12 @@ li:last-of-type {
 
 /*-- Main design--*/
 .page-wrapper {
-	width: 815px;
+	width: 900px;
 	padding: 30px;
 	margin: 30px auto;
 	text-align: left;
 	background: #3b1f02 url("/static/header.jpg") no-repeat top left;
+	background-size: contain; 
 	border-radius: 100px 0px 100px 0px;
 	border: 3px solid #fb7503;
 	box-shadow: 0px 0px 20px #cd6200;
@@ -126,7 +127,7 @@ header {
 
 .supporting {
 	display: inline-block;
-	width: 68.7%;
+	width: 68%;
 	min-height: 550px;	
 }
 
@@ -148,7 +149,7 @@ aside {
 	width: 25%;
     padding: 10px;
 	margin: 5px 30px 0px 0px;
-	background: #764920  linear-gradient(#764920, #40240f);
+	background: #764920  linear-gradient(#764920, #3c2001);
 	border-radius: 20px 0px;
 }
 
@@ -173,6 +174,7 @@ th {
 footer {
 	width: 95%;
 	padding: 10px;
+	margin-top: 20px;	
 	text-align: center;
 	font: 10px verdana,arial,serif ;
 	font-size: 15px;

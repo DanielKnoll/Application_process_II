@@ -145,3 +145,9 @@ def kick_that_mauriseu_guys_out_updated(*args):
 ######################################
 #           Extra features           #
 ######################################
+
+
+@connection_handler
+def show_table(table):
+    query = "SELECT * FROM " + table + ";"
+    return query
