@@ -1,6 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 <article>
-    This is the main page.
+    <h2>Application process - Basic SQL</h2>
+    
+    <p>
+        Handling the application process at Codecool has always been a tedious task. 
+        Finally the HR department figured out that using only Python and long lists 
+        is a no-brainer if they want to get information quickly. To improve on data
+        management, they collaborate with you to test out something they just 
+        heard about: "databases".
+    </p>
+    
+    <h3>The exercise</h3>
+    <p>
+        Luckily they managed to assemble a database, which can be described by the 
+        Entity-Relationship Diagram below:    
+    </p><br>   
+        
+    <p><img src="/static/app_proc_i.png" alt="tables"/></p>
+        
+    <p>
+        They need your help to to write a simple console application which runs and prints
+        quieries on this database (you can use your local PostgreSQL database as they 
+        provided sample data but you should only turn in your program's git repository 
+        url - as before - because they just change the credentials and use the program 
+        on their central database).
+    </p>
 </article>
+<article>
+    <h2>level 2</h2>
+    <h3>The exercise</h3>
+    <p>
+        We continue practicing with native SQL statements, but now you have 6 exercises 
+        for JOINing and GROUPing data tables!
+    </p><br>
+    <p>        
+        The database you need to work on looks like this:    
+    </p><br>
+    <p><img src="/static/app_proc_ii.png" alt="tables"/></p>
+</article>
+
 {% endblock %}
